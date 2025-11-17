@@ -26,7 +26,7 @@ def upgrade() -> None:
         sa.Column("id", sa.Integer(), primary_key=True, nullable=False),
         sa.Column("email", sa.String(), nullable=False),
         sa.Column("password", sa.String(), nullable=False),
-        sa.Column("created_at", sa.TIMESTAMP("now()"), nullable=False),  # type: ignore
+        sa.Column("created_at", sa.TIMESTAMP(timezone=True), nullable=False, server_default=sa.text("now()")),  # type: ignore
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("email"),
     )
